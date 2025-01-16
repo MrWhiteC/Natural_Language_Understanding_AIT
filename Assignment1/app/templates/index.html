@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NLP Word Similarity</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">NLP Word Similarity</h1>
+        <form id="wordForm" class="mt-4">
+            <div class="mb-3">
+                <label for="wordInput" class="form-label">Enter a Word:</label>
+                <input type="text" id="wordInput" class="form-control" placeholder="Type a word..." required>
+            </div>
+            <button type="submit" class="btn btn-primary">Find Similarity</button>
+        </form>
+        <div id="result" class="mt-4" style="display: none;">
+            <h3>Result:</h3>
+            <p><strong>Input Word:</strong> <span id="inputWord"></span></p>
+            <p><strong>Similar Word:</strong> <span id="similarWord"></span></p>
+            <p><strong>Similarity Score:</strong> <span id="similarityScore"></span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('wordForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const wordInput = document.getElementById('wordInput').value;
+
+            try {
+                const response = await fetch('/similarity', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ word: wordInput })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    document.getElementById('inputWord').textContent = data.input_word;
+                    document.getElementById('similarWord').textContent = data.similar_word;
+                    document.getElementById('similarityScore').textContent = data.similarity_score;
+                    document.getElementById('result').style.display = 'block';
+                } else {
+                    alert(data.error || 'An error occurred.');
+                }
+            } catch (error) {
+                alert('An error occurred: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
