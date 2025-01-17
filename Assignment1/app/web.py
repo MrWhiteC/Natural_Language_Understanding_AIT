@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 import torch
-import similarity_cal
-from skipgram import Skipgram,get_embed
+from skipgram import Skipgram,get_embed,find_similar_word
 
 app = Flask(__name__)
 
@@ -15,20 +14,19 @@ def similarity():
     # try:
     data = request.json
     input_word = data.get('word')
-    get_embed(model,[5163])
-    sim_score = similarity_cal.cosine_similarity(model.embedding_center(torch.LongTensor([5163])),model.embedding_center(torch.LongTensor([5163])))
+    sim_score = find_similar_word(model,input_word)
+    similar_word = [i[0] for i in sim_score]
 
     if not input_word:
         return jsonify({"error": "Word is required"}), 400
 
     # Replace the following line with your model's similarity computation logic
-    similar_word,  = "example_word"
 
-    similarity_score = sim_score
+    similarity_score = [i[1] for i in sim_score]
 
     return jsonify({
         "input_word": input_word,
-        "similar_word": sim_score,
+        "similar_word": similar_word,
         "similarity_score": similarity_score
     })
     # except Exception as e:

@@ -1,6 +1,18 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from nltk.corpus import brown
+import numpy as np
+from collections import OrderedDict
+
+news_corpus = brown.sents(categories=['news'])
+word2index = {}
+
+flatten = lambda l: [item for sublist in l for item in sublist]
+vocabs = list(set(flatten(news_corpus))) 
+vocabs.append('<UNK>')
+word2index = {v:idx for idx, v in enumerate(vocabs)}
+index2word = {v:k for k, v in word2index.items()}
 
 class Skipgram(nn.Module):
     
@@ -28,7 +40,7 @@ class Skipgram(nn.Module):
     
 def get_embed(model,word):
     try:
-        index = word2index[word]
+        index = [word]
         word = torch.LongTensor([word2index[word]])
     except:
         index = word2index['<UNK>']
@@ -40,3 +52,16 @@ def get_embed(model,word):
     embed   = (embed_c + embed_o) / 2
     
     return embed[0][0].item(), embed[0][1].item()
+
+
+def cosine_similarity(A, B):
+    dot_product = np.dot(A, B)
+    norm_a = np.linalg.norm(A)
+    norm_b = np.linalg.norm(B)
+    similarity = dot_product / (norm_a * norm_b)
+    return similarity
+
+def find_similar_word(model,input):
+    sim_list = {w:cosine_similarity(get_embed(model,input),get_embed(model,w)) for w in vocabs }
+    sort_sim_list = sorted(sim_list.items(), key=lambda kv: (kv[1], kv[0]),reverse=True)
+    return sort_sim_list[:10]
