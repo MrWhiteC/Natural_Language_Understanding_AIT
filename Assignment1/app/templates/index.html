@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NLP Word Similarity</title>
+    <title>Assignment 1 for NLU Class</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">NLP Word Similarity</h1>
+        <h1 class="text-center">Assignment 1 for NLU Class</h1>
         <form id="wordForm" class="mt-4">
             <div class="mb-3">
                 <label for="wordInput" class="form-label">Enter a Word:</label>
@@ -19,8 +19,7 @@
         <div id="result" class="mt-4" style="display: none;">
             <h3>Result:</h3>
             <p><strong>Input Word:</strong> <span id="inputWord"></span></p>
-            <p><strong>Similar Word:</strong> <span id="similarWord"></span></p>
-            <p><strong>Similarity Score:</strong> <span id="similarityScore"></span></p>
+            <p><strong>Similar Word:</strong> <span id="similarResult"></span></p>
         </div>
     </div>
 
@@ -40,11 +39,17 @@
                 });
 
                 const data = await response.json();
-
+ 
                 if (response.ok) {
-                    document.getElementById('inputWord').textContent = data.input_word;
-                    document.getElementById('similarWord').textContent = data.similar_word;
-                    document.getElementById('similarityScore').textContent = data.similarity_score;
+                    document.getElementById('inputWord').innerHTML = data.input_word;
+                    document.getElementById('similarResult').innerHTML = "";
+                    for (let i = 0; i < data.similar_word.length; i++) {
+
+                        const wordElement = document.createElement('p');
+                        wordElement.textContent = `Similarity Score -> ${data.similarity_score[i]}: Similar Word -> ${data.similar_word[i]}`;
+                    
+                        document.getElementById('similarResult').appendChild(wordElement);
+                    }
                     document.getElementById('result').style.display = 'block';
                 } else {
                     alert(data.error || 'An error occurred.');

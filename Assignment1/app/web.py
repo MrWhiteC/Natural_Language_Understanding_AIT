@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 import torch
-from skipgram import Skipgram,get_embed,find_similar_word
+from skipgram import Skipgram,get_embed,find_similar_word,SkipgramNeg,get_embed_skipgram_neg
 
 app = Flask(__name__)
 
@@ -10,7 +10,7 @@ def home():
 
 @app.route('/similarity', methods=['POST'])
 def similarity():
-    model = torch.load("model_skipgram", weights_only=False)
+    model = torch.load("model_skipgram_neg", weights_only=False)
     # try:
     data = request.json
     input_word = data.get('word')
