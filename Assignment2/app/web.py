@@ -1,6 +1,17 @@
 from flask import Flask, request, jsonify, render_template
 import torch
-from skipgram import Skipgram,get_embed,find_similar_word,SkipgramNeg,get_embed_skipgram_neg
+from lstm import LSTMLanguageModel,generate,get_tokenizer,get_vocab
+import datasets
+
+dataset = datasets.load_dataset("text", data_files={"train": "mobydick_train.txt","test":"mobydick_test.txt","validation":"mobydick_validate.txt"})
+emb_dim = 1024                
+hid_dim = 1024                
+num_layers = 2                
+dropout_rate = 0.65              
+lr = 1e-3            
+tokenizer = get_tokenizer()
+vocab = get_vocab(dataset)
+vocab_size = len(vocab)
 
 app = Flask(__name__)
 
@@ -10,27 +21,35 @@ def home():
 
 @app.route('/similarity', methods=['POST'])
 def similarity():
-    model = torch.load("model_skipgram_neg", weights_only=False)
-    # try:
-    data = request.json
-    input_word = data.get('word')
-    sim_score = find_similar_word(model,input_word)
-    similar_word = [i[0] for i in sim_score]
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    model  = LSTMLanguageModel(vocab_size, emb_dim, hid_dim, num_layers, dropout_rate).to(device)
+    model.load_state_dict(torch.load('best-val-lstm_lm.pt',  map_location=device))
+    try:
+        data = request.json
+        input_word = data.get('word')
 
-    if not input_word:
-        return jsonify({"error": "Word is required"}), 400
+        prompt = input_word
+        max_seq_len = 30
+        seed = 0
+        
+        generation = generate(prompt, max_seq_len, 0.5, model, tokenizer, vocab, device, seed)
 
-    # Replace the following line with your model's similarity computation logic
 
-    similarity_score = [i[1] for i in sim_score]
+        similar_word = ' '.join(generation)
 
-    return jsonify({
-        "input_word": input_word,
-        "similar_word": similar_word,
-        "similarity_score": similarity_score
-    })
-    # except Exception as e:
-    #     return jsonify({"error": str(e)}), 500
+        if not input_word:
+            return jsonify({"error": "Word is required"}), 400
+
+        # Replace the following line with your model's similarity computation logic
+
+        similarity_score = 1
+
+        return jsonify({
+            "input_word": input_word,
+            "similar_word": similar_word,
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

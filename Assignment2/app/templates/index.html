@@ -19,7 +19,7 @@
         <div id="result" class="mt-4" style="display: none;">
             <h3>Result:</h3>
             <p><strong>Input Word:</strong> <span id="inputWord"></span></p>
-            <p><strong>Similar Word:</strong> <span id="similarResult"></span></p>
+            <p><strong>Generate Word:</strong> <span id="similarResult"></span></p>
         </div>
     </div>
 
@@ -43,13 +43,7 @@
                 if (response.ok) {
                     document.getElementById('inputWord').innerHTML = data.input_word;
                     document.getElementById('similarResult').innerHTML = "";
-                    for (let i = 0; i < data.similar_word.length; i++) {
-
-                        const wordElement = document.createElement('p');
-                        wordElement.textContent = `Similarity Score -> ${data.similarity_score[i]}: Similar Word -> ${data.similar_word[i]}`;
-                    
-                        document.getElementById('similarResult').appendChild(wordElement);
-                    }
+                    document.getElementById('similarResult').innerHTML = data.similar_word;
                     document.getElementById('result').style.display = 'block';
                 } else {
                     alert(data.error || 'An error occurred.');
