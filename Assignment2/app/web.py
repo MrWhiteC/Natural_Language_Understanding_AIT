@@ -3,7 +3,7 @@ import torch
 from lstm import LSTMLanguageModel,generate,get_tokenizer,get_vocab
 import datasets
 
-dataset = datasets.load_dataset("text", data_files={"train": "mobydick_train.txt","test":"mobydick_test.txt","validation":"mobydick_validate.txt"})
+dataset = dataset = datasets.load_dataset( "text", data_files={"train": "fairytales_train.txt","test":"fairytales_test.txt","validation":"fairytales_validate.txt"})
 emb_dim = 1024                
 hid_dim = 1024                
 num_layers = 2                
