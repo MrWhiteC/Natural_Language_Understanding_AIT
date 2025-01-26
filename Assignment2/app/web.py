@@ -27,12 +27,13 @@ def similarity():
     try:
         data = request.json
         input_word = data.get('word')
+        input_tem = data.get('temperature')
 
         prompt = input_word
         max_seq_len = 30
         seed = 0
         
-        generation = generate(prompt, max_seq_len, 0.5, model, tokenizer, vocab, device, seed)
+        generation = generate(prompt, max_seq_len, float(input_tem), model, tokenizer, vocab, device, seed)
 
 
         similar_word = ' '.join(generation)

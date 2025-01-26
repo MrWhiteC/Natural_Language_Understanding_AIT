@@ -8,11 +8,26 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="text-center">Assignment 1 for NLU Class</h1>
+        <h1 class="text-center">Assignment 2 for NLU Class</h1>
+    <div style="border: 2px solid black; padding: 10px; border-radius: 5px;">
+        <h4 class="text-center">Documentation</h2>
+        <body> 
+            This website build based an Language Model with Long Short-Term Memory. The following steps show how the input text will be 
+            used to generated next words. <br>
+            1. Users must input the desired words and temperature (temperature is the number for controlling diversity of words) which have
+            range from 0 - 1. (lower = less diverse, higher = more diverse) <br>
+            2. The words will be feed into the model to predict the next words. <br>
+            3. If the word is not avaiable, the application will do prediction again. <br>
+            4. If the word is the end of sentence, the application will do prediction and return the whole sentence. <br>
+            5. The result of generated sentenced will be shown on the interface. <br>
+        </body>
+    </div>
         <form id="wordForm" class="mt-4">
             <div class="mb-3">
                 <label for="wordInput" class="form-label">Enter a Word:</label>
                 <input type="text" id="wordInput" class="form-control" placeholder="Type a word..." required>
+                <label for="temperatureInput" class="form-label">Enter a Temperature:</label>
+                <input type="number" id="temperatureInput" class="form-control" step="any" placeholder="0.5" required>
             </div>
             <button type="submit" class="btn btn-primary">Find Similarity</button>
         </form>
@@ -28,6 +43,7 @@
             event.preventDefault();
 
             const wordInput = document.getElementById('wordInput').value;
+            const temperatureInput = document.getElementById('temperatureInput').value;
 
             try {
                 const response = await fetch('/similarity', {
@@ -35,7 +51,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ word: wordInput })
+                    body: JSON.stringify({ word: wordInput, temperature: temperatureInput})
                 });
 
                 const data = await response.json();
