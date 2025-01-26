@@ -33,6 +33,8 @@
 
 3. Task 3: Text Generation - Web Application Development
 
+
+
     1. This website build based an Language Model with Long Short-Term Memory. The following steps show how the input text will be 
             used to generated next words.
         1. Users must input the desired words and temperature (temperature is the number for controlling diversity of words) which have
@@ -41,5 +43,7 @@
         3. If the word is not avaiable, the application will do prediction again.
         4. If the word is the end of sentence, the application will do prediction and return the whole sentence.
         5. The result of generated sentenced will be shown on the interface. 
+        
+![website](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment2/images/a2_website.png)
 
     
