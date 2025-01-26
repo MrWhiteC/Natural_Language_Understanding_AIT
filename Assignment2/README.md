@@ -1,4 +1,4 @@
-## Assignment 2 Deliver Details
+## Assignment 2 Deliver Details (st124903_Vorameth)
 
 
 1. Task 1: Data Acquisition 
@@ -43,7 +43,7 @@
         3. If the word is not avaiable, the application will do prediction again.
         4. If the word is the end of sentence, the application will do prediction and return the whole sentence.
         5. The result of generated sentenced will be shown on the interface. 
-        
+
 ![website](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment2/images/a2_website.png)
 
     
