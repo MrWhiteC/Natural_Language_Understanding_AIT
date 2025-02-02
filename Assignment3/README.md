@@ -38,8 +38,6 @@ token_transform[TRG_LANGUAGE] = pythainlp.tokenize.word_tokenize
     Multiplicative Attention | 5.713 | 302.825| 5.721 | 305.200 | 46 min |
     Additive Attention | 5.728 | 307.352 | 5.705 | 300.445 | 70 min |
 
-    Based
-
 2. Performance Graphs
     1. General 
     
