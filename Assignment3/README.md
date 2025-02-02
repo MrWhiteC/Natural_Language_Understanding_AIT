@@ -28,7 +28,7 @@ token_transform[TRG_LANGUAGE] = pythainlp.tokenize.word_tokenize
 3. Additive Attention 
     ```python
     energy = self.v(torch.tanh(self.W(hidden) + self.U(encoder_outputs))).squeeze(2)
-        ```
+    ```
 
 ## Task 3: Evaluation and Verification
 1. Metrices
