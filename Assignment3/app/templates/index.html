@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 3 for NLU Class</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Assignment 3 for NLU Class</h1>
+    <div style="border: 2px solid black; padding: 10px; border-radius: 5px;">
+        <h4 class="text-center">Documentation</h2>
+        <body> 
+            This website build based an Attention Mechanism. The following steps show how the input text (English) will be translated (Thai). <br>
+            1. Users must input English words that would like to tranlsate into Thai words.<br>
+            2. Each word will be feed into the model to encode into a vector and then decode according to probability of targeted word in Thai. <br>
+            3. The word will provide possbile of target words based on attention score of input word and other weights. <br>
+            4. The highest probability words will be selected and join into the sentence which will show on the interface. <br>
+
+        </body>
+    </div>
+        <form id="wordForm" class="mt-4">
+            <div class="mb-3">
+                <label for="wordInput" class="form-label">Enter a Word:</label>
+                <input type="text" id="wordInput" class="form-control" placeholder="Type a word..." required>
+            </div>
+            <button type="submit" class="btn btn-primary">Find Similarity</button>
+        </form>
+        <div id="result" class="mt-4" style="display: none;">
+            <h3>Result:</h3>
+            <p><strong>Input Word:</strong> <span id="inputWord"></span></p>
+            <p><strong>Translate Word:</strong> <span id="similarResult"></span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('wordForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const wordInput = document.getElementById('wordInput').value;
+
+            try {
+                const response = await fetch('/similarity', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ word: wordInput})
+                });
+
+                const data = await response.json();
+ 
+                if (response.ok) {
+                    document.getElementById('inputWord').innerHTML = data.input_word;
+                    document.getElementById('similarResult').innerHTML = "";
+                    document.getElementById('similarResult').innerHTML = data.similar_word;
+                    document.getElementById('result').style.display = 'block';
+                } else {
+                    alert(data.error || 'An error occurred.');
+                }
+            } catch (error) {
+                alert('An error occurred: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
