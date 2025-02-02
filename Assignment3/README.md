@@ -40,19 +40,29 @@
 
     2. Performance Graphs
         1. General 
-            ![general](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/train_loss_general.png)
+        
+        ![general](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/train_loss_general.png)
+
         2. Multiplicative 
-            ![multi](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/train_loss_multiplicative.png)
+        
+        ![multi](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/train_loss_multiplicative.png)
+
         3. Additive 
-            ![add](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/train_loss_additive.png)
+        
+        ![add](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/train_loss_additive.png)
 
     3. Attention Maps
         1. General 
-            ![generalmap](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/heatmap_general.png)
+        
+        ![generalmap](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/heatmap_general.png)
+
         2. Multiplicative 
-            ![multimap](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/heatmap_multiplicative.png)
+        
+        ![multimap](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/heatmap_multiplicative.png)
+
         3. Additive 
-            ![addmap](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/heatmap_additive.png)
+        
+        ![addmap](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/heatmap_additive.png)
 
     4. Aanlysis
 
@@ -67,6 +77,6 @@
         3. The word will provide possbile of target words based on attention score of input word and other weights. 
         4. The highest probability words will be selected and join into the sentence which will show on the interface.
 
-![website](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment2/images/a3_website.png)
+![website](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/a3_website.png)
 
     
