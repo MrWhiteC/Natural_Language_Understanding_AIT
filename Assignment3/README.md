@@ -38,6 +38,8 @@ token_transform[TRG_LANGUAGE] = pythainlp.tokenize.word_tokenize
     Multiplicative Attention | 5.713 | 302.825| 5.721 | 305.200 | 46 min |
     Additive Attention | 5.728 | 307.352 | 5.705 | 300.445 | 70 min |
 
+    Based
+
 2. Performance Graphs
     1. General 
     
@@ -65,7 +67,7 @@ token_transform[TRG_LANGUAGE] = pythainlp.tokenize.word_tokenize
     ![addmap](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/heatmap_additive.png)
 
 4. Analysis
-    According to the aformentioned metrics, performance graph, and attention maps. It seems like additive attention is the most efficient and accurate due to the overall training loss and perplexity in training and validation during training process. This is becuase in additive attention allow more path to be learning through weight whichincrease the possible answer for translation. However, in the heatmap, the result seem to show that additive fail to translate the word from the input words. This could happen becuase the complication of Thai sentence which require more Thai tokenization or normalization process that will corretly mapped with English words directly.
+    According to the aformentioned metrics, performance graph, and attention maps. It seems like additive attention is the most efficient and accurate due to the overall training loss and perplexity in training and validation during training process. This is becuase in additive attention allow more path to be learning through weight whichincrease the possible answer for translation. However, in the heatmap, the result seem to show that additive fail to translate the word from the input words, but eventually I chose the additive because additive result more various words compared to other models.This could happen becuase the complication of Thai sentence which require more Thai tokenization or normalization process that will corretly mapped with English words directly. 
 
 
 ## Task 4: Machine Translation - Web Application Development
