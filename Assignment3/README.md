@@ -64,9 +64,8 @@ token_transform[TRG_LANGUAGE] = pythainlp.tokenize.word_tokenize
     
     ![addmap](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/heatmap_additive.png)
 
-4. Aanlysis
-
-
+4. Analysis
+    According to the aformentioned metrics, performance graph, and attention maps. It seems like additive attention is the most efficient and accurate due to the overall training loss and perplexity in training and validation during training process. This is becuase in additive attention allow more path to be learning through weight whichincrease the possible answer for translation. However, in the heatmap, the result seem to show that additive fail to translate the word from the input words. This could happen becuase the complication of Thai sentence which require more Thai tokenization or normalization process that will corretly mapped with English words directly.
 
 
 ## Task 4: Machine Translation - Web Application Development
