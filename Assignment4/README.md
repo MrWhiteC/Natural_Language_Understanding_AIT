@@ -5,8 +5,7 @@ leveraging text embeddings to capture semantic similarity. Additionally, we will
 loss function for tasks like Natural Language Inference (NLI) to enhance the model’s ability to understand
 semantic relationships between texts.
 
-## Task 1:
-1. Training BERT from Scratch
+## Task 1: Training BERT from Scratch
 
 In task 1, the training process will be done through the Bidirectional encoder representations from transformers (BERT) which written from scratch from **Prof. Chaklam Silpasuwanchai** ([BERT](https://github.com/chaklam-silpasuwanchai/Python-fo-Natural-Language-Processing/tree/main/Code/02%20-%20DL/04%20-%20Masked%20Language%20Model)). The detailed model is: 
 - Number of Encoder of Encoder Layer is 12
@@ -15,7 +14,6 @@ In task 1, the training process will be done through the Bidirectional encoder r
 - FeedForward dimension is 768 * 4 
 - Dimension of K, Q, and V is is 64
 - Number of Segments is 2
-
 
 
 For dataset, [TinyStories](https://huggingface.co/datasets/roneneldan/TinyStories) will be used to train the model which detailed will be:
@@ -40,64 +38,55 @@ Moreover, the dataloader is the main focus in BERT model which could help the mo
 - segment_ids : Identify for the model which token a in sentence a and token b in setence b.
 - masked_tokens and masked_pos : Masked tokens for model to predict. 
 
-2. 
+## Task 2: Sentence Embedding with Sentence BERT
 
-```python
-token_transform[TRG_LANGUAGE] = pythainlp.tokenize.word_tokenize
-```
-   
+To extend the application of BERT, the Sentence BERT or S-BERT had been introduced which the BERT model will be trained with The Stanford Natural Language Inference (SNLI) Corpus or The Multi-Genre Natural Language Inference (MNLI) corpus for applying classification problem into S-BERT model. Futhuremore, the model will be trained with siamese network structures to derive semantically meaningful sentence embeddings that can be compared using cosine-similarity.
 
-## Task 2: 
-1. General Attention
+In this assignment, both SNLI and MNLI will be used to train the model. Any preprocess and dataloader will use the coding from the pre-trained model for making sure the input data that should be the same.
+
     ```python
-    energy = (encoder_outputs*hidden).sum(dim=2)
+        snli = datasets.load_dataset('snli')
+        mnli = datasets.load_dataset('glue', 'mnli')
+        sentences_premise = raw_dataset['train']['premise'] >  batch_a = make_batch()
+        sentences_hypothesis = raw_dataset['train']['hypothesis'] >  batch_b = make_batch()
     ```
 
-2. Multiplicative Attention
+Then during the training process, the siamese network structures with Classification Objective Function (Softmax Loss) will be focused. 
+
     ```python
-    energy = (encoder_outputs*self.W(hidden).repeat(1, 1, 2)).sum(dim=2)
-    ```
-3. Additive Attention 
-    ```python
-    energy = self.v(torch.tanh(self.W(hidden) + self.U(encoder_outputs))).squeeze(2)
+        # predict the last hidden state
+        u,_ = model(input_ids_a, segment_ids_a, masked_pos_a)  
+        v,_ = model(input_ids_b, segment_ids_b, masked_pos_b)  
+
+        # |u-v| tensor
+        uv = torch.sub(u, v)  
+        uv_abs = torch.abs(uv) 
+        
+        # concatenate u, v, |u-v|
+        x = torch.cat([u, v, uv_abs], dim=-1) 
+        
+        # process concatenated tensor through classifier_head
+        x = classifier_head(x) 
+
+        # reduce for input into loss funciton
+        x = x.mean(dim=1)
+
+        # softmax loss
+        loss = criterion(x, label)
     ```
 
-## Task 3: 
+Based on the above softmax loss output, the loss is average with (2 epoches were run due to resource limitation)
+
+## Task 3: Evaluation and Analysis
 1. Metrices
-    Attentions | Training Loss | Training PPL | Validation Loss | Validation PPL | Computation Time
-    --- | --- | --- | --- |--- |---
-    General Attention | 5.723 | 305.838 | 5.721 | 305.170 | 23 min |
-    Multiplicative Attention | 5.713 | 302.825| 5.721 | 305.200 | 46 min |
-    Additive Attention | 5.728 | 307.352 | 5.705 | 300.445 | 70 min |
+    Model Type | SNLI OR MNLI Performance
+    --- | --- 
+    Our Model | Loss = , Accuracy =  |
 
-2. Performance Graphs
-    1. General 
-    
-    ![general](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/train_loss_general.png)
 
-    2. Multiplicative 
-    
-    ![multi](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/train_loss_multiplicative.png)
-
-    3. Additive 
-    
-    ![add](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/train_loss_additive.png)
-
-3. Attention Maps
-    1. General 
-    
-    ![generalmap](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/heatmap_general.png)
-
-    2. Multiplicative 
-    
-    ![multimap](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/heatmap_multiplicative.png)
-
-    3. Additive 
-    
-    ![addmap](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/heatmap_additive.png)
-
-4. Analysis
-    According to the aformentioned metrics, performance graph, and attention maps. It seems like additive attention is the most efficient and accurate due to the overall training loss and perplexity in training and validation during training process. This is becuase in additive attention allow more path to be learning through weight whichincrease the possible answer for translation. However, in the heatmap, the result seem to show that additive fail to translate the word from the input words, but eventually I chose the additive because additive result more various words compared to other models.This could happen becuase the complication of Thai sentence which require more Thai tokenization or normalization process that will corretly mapped with English words directly. 
+2. Analysis
+    - Limitations or Challenges 
+    - Propose Potential Improvements or Modifications.
 
 
 ## Task 4: Machine Translation - Web Application Development
