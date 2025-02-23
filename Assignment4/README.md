@@ -81,22 +81,41 @@ Based on the above softmax loss output, the loss is average with (2 epoches were
 1. Metrices
     Model Type | SNLI OR MNLI Performance
     --- | --- 
-    Our Model | Loss = , Accuracy =  |
+    Our Model | Loss = 9.535, Accuracy =  16.666|
 
 
 2. Analysis
-    - Limitations or Challenges 
+    - Limitations or Challenges
+        - The main challenges for this assignment is applied BERT into S-BERT model. With the from scratch implmentation, the model could not completely comply with the variables and paramter on the BERT from Google model. This is enforced that the datasets have to be applied with from scrath model which quite difficult to adjust due to problems of completely different applications. BERT requires 3 paramters (input,segment, masked positiion) whick will predict masked word while S-BERT requires 2 paramters (input, attent mask) which will predict the context classification. This could cause mismatch on size or dimension. From aformentioned, adaptation from BERT with datasets to train S-BERT is challenging.
+
+        - Training size is another problems due to the resources limitation. In puffer server, the out of memory always occur due to share resource pools. To workaround, only 2 epoches will be used to trained the S-BERT model. Moreover, 1 percent of a millions datasets are trained in BERT model. This cause model to always predict in entailment only.
+
     - Propose Potential Improvements or Modifications.
+        - To solve translation problems, the implementors should study more on how to transfer the BERT to S-BERT model. This means that weights, parameters, dimension, layers should be correlated and correctly defined. Moreover, the dataloader should be more specific for SNLI and MNLI datasets which receive two sentence for comparing the similarity while the original datasets sample 2 sentences to predict the masked tokens. Based on this, the dataloader should be coded to make the SNLI and MNLI datasets to comply with original dataset manner and including adjustment the paramter for BERT model parameters, outputs, and layers to accept specific application for classification.
+
+        - To improve the accuracy, the training size should be increased which model could capture variety of the word from the shuffle method in the dataloader. Moreover, the number epoches should be increased in order to let the model learn in deeper weight adjusting which could help to capture more relation in the masked words. In addition, to prevent dominant prediction, the regularization should be applied together with more sampled data. 
 
 
-## Task 4: Machine Translation - Web Application Development
 
-- This website build based an Attention Mechanism. The following steps show how the input text (English) will be translated (Thai).
-    1. Users must input English words that would like to tranlsate into Thai words.
-    2. Each word will be feed into the model to encode into a vector and then decode according to probability of targeted word in Thai.
-    3. The word will provide possbile of target words based on attention score of input word and other weights. 
-    4. The highest probability words will be selected and join into the sentence which will show on the interface.
+## Task 4: Web Application Development
 
-![website](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment3/images/a3_website.png)
+The webiste is built based on S-BERT model which it will predict the relationships between 2 sentences whether they are entailment, contradiction, and neutral. A breif tech stacks are Flask as the backend and HTML as the frontend.
+
+Input A : <Text A>
+Input B : <Text B>
+
+Result : <Classification of Both Text>
+
+Example 1
+
+![website](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment4/images/website1.png)
+
+Example 2
+
+![website](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment4/images/website2.png)
+
+Example 3
+
+![website](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment4/images/website3.png)
 
     
