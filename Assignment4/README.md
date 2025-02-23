@@ -101,10 +101,10 @@ Based on the above softmax loss output, the loss is average with (2 epoches were
 
 The webiste is built based on S-BERT model which it will predict the relationships between 2 sentences whether they are entailment, contradiction, and neutral. A breif tech stacks are Flask as the backend and HTML as the frontend.
 
-Input A : <Text A>
-Input B : <Text B>
+Input A : Text A
+Input B : Text B
 
-Result : <Classification of Both Text>
+Result : Classification of Both Text
 
 Example 1
 
