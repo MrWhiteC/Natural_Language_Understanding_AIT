@@ -44,36 +44,36 @@ To extend the application of BERT, the Sentence BERT or S-BERT had been introduc
 
 In this assignment, both SNLI and MNLI will be used to train the model. Any preprocess and dataloader will use the coding from the pre-trained model for making sure the input data that should be the same.
 
-    ```python
-        snli = datasets.load_dataset('snli')
-        mnli = datasets.load_dataset('glue', 'mnli')
-        sentences_premise = raw_dataset['train']['premise'] >  batch_a = make_batch()
-        sentences_hypothesis = raw_dataset['train']['hypothesis'] >  batch_b = make_batch()
-    ```
+```python
+snli = datasets.load_dataset('snli')
+mnli = datasets.load_dataset('glue', 'mnli')
+sentences_premise = raw_dataset['train']['premise'] >  batch_a = make_batch()
+sentences_hypothesis = raw_dataset['train']['hypothesis'] >  batch_b = make_batch()
+```
 
 Then during the training process, the siamese network structures with Classification Objective Function (Softmax Loss) will be focused. 
 
-    ```python
-        # predict the last hidden state
-        u,_ = model(input_ids_a, segment_ids_a, masked_pos_a)  
-        v,_ = model(input_ids_b, segment_ids_b, masked_pos_b)  
+```python
+# predict the last hidden state
+u,_ = model(input_ids_a, segment_ids_a, masked_pos_a)  
+v,_ = model(input_ids_b, segment_ids_b, masked_pos_b)  
 
-        # |u-v| tensor
-        uv = torch.sub(u, v)  
-        uv_abs = torch.abs(uv) 
-        
-        # concatenate u, v, |u-v|
-        x = torch.cat([u, v, uv_abs], dim=-1) 
-        
-        # process concatenated tensor through classifier_head
-        x = classifier_head(x) 
+# |u-v| tensor
+uv = torch.sub(u, v)  
+uv_abs = torch.abs(uv) 
 
-        # reduce for input into loss funciton
-        x = x.mean(dim=1)
+# concatenate u, v, |u-v|
+x = torch.cat([u, v, uv_abs], dim=-1) 
 
-        # softmax loss
-        loss = criterion(x, label)
-    ```
+# process concatenated tensor through classifier_head
+x = classifier_head(x) 
+
+# reduce for input into loss funciton
+x = x.mean(dim=1)
+
+# softmax loss
+loss = criterion(x, label)
+```
 
 Based on the above softmax loss output, the loss is average with (2 epoches were run due to resource limitation)
 
