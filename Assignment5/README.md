@@ -17,11 +17,12 @@ In task 1, the suitable dataset will be prepared for training a pre-trained mode
 dataset = load_dataset('XueyingJia/hh-rlhf-train-helpful-subset', split=split)
 ```
 
-In pre-processing step, the pre-trained tokenizer will be used (According to GPT2): 
-- 
-- 
-- 
-
+In pre-processing, the tokenizer from pre-trained model will be used which follows : 
+- Spaces or Special will be cleaned
+- Added UNK token
+- Added BOS Token
+- Added EOS Token
+- Added Pad Token
 
 
 ## Task 2: Training a Model with DPOTrainer
@@ -66,6 +67,7 @@ After the training process, the model will be used into hugginface platform for 
 
 
 ```python
+dpo_trainer.save_model("dpo_model_rlhf")
 model.push_to_hub("dpo_model_rlhf")
 ```
 
