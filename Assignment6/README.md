@@ -33,7 +33,7 @@ PROMPT = ChatPromptTemplate.from_messages(
 
 After the design of the template, some models will be explored for a choosing best chatbot's response. Here are the models that have been explored.  
 - fastchat-t5-3b-v1.0
-- llama-3.1-8b-instant
+- gemma2-9b-it
 - llama3-70b-8192 (Selected)
 
 The llama3-70b-8192 was choosen to be used in this assignment because it could return the most relevant information according RAG. 
@@ -41,7 +41,7 @@ The llama3-70b-8192 was choosen to be used in this assignment because it could r
 
 ## Task 2: Analysis and Problem Solving
 
-In this assignment there 3 generator models and 2 retreiver models that had been utilized to create a cloned chatbot of myself.
+In this assignment there 3 generator models and 3 retreiver models that had been utilized to create a cloned chatbot of myself.
 
 - Retreiver
     1. FAISS
@@ -50,18 +50,24 @@ In this assignment there 3 generator models and 2 retreiver models that had been
 
 - Generator Models
     1. FastChat-T5
-    2. GROQ - llama-3.1-8b-instant
+    2. GROQ - gemma2-9b-it
     3. GROQ - llama3-70b-8192
+
+During the prompting there are some issues that cause from retriver and generator which could cause unrelevant information. Here are some issues which had been encounterd with: 
+
+- Retreiver : Some mentioned issues are the dependency on the PDF is quite a lots which cause all the sources to return only the PDF file ranther than the websites and some retreivers only use the some content to be sourced in the RAG technique. This issues could happne because the size of document is not the same which could cause the dominant problems on one reliable source only. Moreover, as mentioned, some retreivers might look the document in the whole which not specific in the content which cause some unrelevant data happened. 
+
+- Generator Models : Some generators return a out-of-scope information which cause unrelevant data result. From my understanding, because some mdoel ignores the propmt or they don't strictly follow the context which cause the knowledge based to be expaned out off the documents. Moreover, some models is trained enough compare between to the other model. This cause the model to be confuse on the context that was provided. 
 
 ## Task 3: Chatbot Development - Web Application Development
 
-The website will be built for allowing user to fill the question which the system will anwser according to the trained model on DPO with training dataset on task 2 and task 1. 
+The website 
 
 Input Text: Question
 
 Result : Chatbot Answer with Sources
 
-All Question  and Answer Link :
+**All Question  and Answer Link :**
 
 [Question and Answer](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment6/question_answer.json)
 
