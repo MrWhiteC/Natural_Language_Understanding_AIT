@@ -63,7 +63,7 @@ Result : Chatbot Answer with Sources
 
 All Question  and Answer Link :
 
-![Question and Answer](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment6/question_answer.json)
+[Question and Answer](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment6/question_answer.json)
 
 Example 1
 
