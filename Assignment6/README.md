@@ -62,7 +62,7 @@ During the prompting there are some issues that cause from retriver and generato
 
 - Retreiver : Some mentioned issues are the dependency on the PDF is quite a lots which cause all the sources to return only the PDF file ranther than the websites and some retreivers only use the some content to be sourced in the RAG technique. This issues could happne because the size of document is not the same which could cause the dominant problems on one reliable source only. Moreover, as mentioned, some retreivers might look the document in the whole which not specific in the content which cause some unrelevant data happened. 
 
-- Generator Models : Some generators return a out-of-scope information which cause unrelevant data result. From my understanding, because some mdoel ignores the propmt or they don't strictly follow the context which cause the knowledge based to be expaned out off the documents. Moreover, some models is trained enough compare between to the other model. This cause the model to be confuse on the context that was provided. 
+- Generator Models : Some generators return a out-of-scope information which cause unrelevant data result. From my understanding, some modes ignore the propmt or they don't strictly follow the context which cause the knowledge based to be expaned out of the documents. Moreover, some models were huge compare to the other model which cause the model to be confuse on the context that was provided from the document. 
 
 ## Task 3: Chatbot Development - Web Application Development
 
