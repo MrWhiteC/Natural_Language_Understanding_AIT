@@ -72,7 +72,7 @@ Input Text: Question
 
 Result : Chatbot Answer with Sources
 
-**All Question  and Answer Link :**
+**All Question  and Answer Link in JSON format:**
 
 [Question and Answer](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/blob/main/Assignment6/question_answer.json)
 
