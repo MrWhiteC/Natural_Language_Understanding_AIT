@@ -43,6 +43,11 @@ The llama3-70b-8192 was choosen to be used in this assignment because it could r
 
 In this assignment there 3 generator models and 3 retreiver models that had been utilized to create a cloned chatbot of myself.
 
+- Embedding Model
+    1. hkunlp/instructor-large
+    2. hkunlp/instructor-base
+    3. hkunlp/instructor-xl
+
 - Retreiver
     1. FAISS
     2. LancDB
