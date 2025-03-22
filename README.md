@@ -11,4 +11,5 @@ Assignment Submission for NLU Class 2025
 4.  Link to : >{[Assignment 4 ](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/tree/main/Assignment4)}
 5.  Link to : >{[Assignment 5 ](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/tree/main/Assignment5)}
 6.  Link to : >{[Assignment 6 ](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/tree/main/Assignment6)}
+7.  Link to : >{[Assignment 7](https://github.com/MrWhiteC/Natural_Language_Understanding_AIT/tree/main/Assignment7)}
 
